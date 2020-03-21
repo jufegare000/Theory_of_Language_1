@@ -12,7 +12,7 @@ class CreateConcat {
     let fourth = this.addNode(null);
     this.connectNode(initial, second);
     this.connectNode(second, third);
-    this.connectNode(initial, fourth);
+    this.connectNode(third, fourth);
     console.log(this.List);
   }
 
