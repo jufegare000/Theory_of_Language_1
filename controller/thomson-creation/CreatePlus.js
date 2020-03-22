@@ -14,7 +14,8 @@ class CreatePlus {
     this.connectNode(second, third);
     this.connectNode(third, second);
     this.connectNode(initial, fourth);
-    console.log(this.List);
+    //console.log(this.List);
+    return this.List;
   }
 
   addNode(data) {

@@ -5,15 +5,17 @@ class CreateConcat {
     this.List = new NodeGraph();
   }
 
-  createConcat() {
+  createConcat(data1, data2) {
     let initial = this.addNode("λ");
-    let second = this.addNode("r");
-    let third = this.addNode("s");
+    let second = this.addNode(data1);
+    let third = this.addNode(data2);
     let fourth = this.addNode(null);
     this.connectNode(initial, second);
     this.connectNode(second, third);
     this.connectNode(third, fourth);
-    console.log(this.List);
+    //console.log(this.List);
+
+    return this.List;
   }
 
   addNode(data) {
@@ -27,5 +29,8 @@ class CreateConcat {
     this.List.addEdge(a, b);
   }
 }
+
+module.exports = CreateConcat;
+
 let conc = new CreateConcat();
 conc.createConcat();
