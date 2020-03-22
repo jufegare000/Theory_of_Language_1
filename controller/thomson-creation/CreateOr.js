@@ -19,7 +19,9 @@ class CreateOr {
     this.connectNode(fourth, fifth);
     this.connectNode(fifth, sixth);
     this.connectNode(third, sixth);
-    console.log(this.List);
+    //console.log(this.List);
+
+    return this.List;
   }
 
   addNode(data) {
