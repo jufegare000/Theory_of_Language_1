@@ -1,4 +1,3 @@
-
 class NodeT {
   constructor(identifier, data){
     this.identifier = identifier;
