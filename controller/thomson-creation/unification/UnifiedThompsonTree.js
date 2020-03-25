@@ -9,9 +9,8 @@ class UnifiedThomsonTree{
 
     main(){
         //Try to connect the expresion (r|a).s
-        //Create an instance of CreateOr
+        //Create an instance of CreateOr and CreateConcat
         let orThompson = new Or("r", "a");
-        
         let concatThompson = new Concat("aux", "s");
         let firstConMode = concatThompson.List.getFirstNode();
         let nextConcat = concatThompson.List.findNext(firstConMode);
