@@ -1,5 +1,5 @@
-let List = require('../../base/LDL');
-let DNode = require('../../base/DoubleNode');
+let List = require('../../model/LDL');
+let DNode = require('../../model/DoubleNode');
 
 class Star{
     constructor(data){

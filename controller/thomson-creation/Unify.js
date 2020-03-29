@@ -1,9 +1,9 @@
-let Or = require('../thompson/base/Or');
-let And = require('../thompson/base/Concat');
-let Star = require('../thompson/base/Star');
-let Plus = require('../thompson/base/Plus');
-let DNode = require('../base/DoubleNode');
-let LDL = require('../base/LDL');
+let Or = require('./Or');
+let And = require('./Concat');
+let Star = require('./Star');
+let Plus = require('./Plus');
+let DNode = require('../../model/DoubleNode');
+let LDL = require('../../model/LDL');
 let Utils = require('./utils/ThompsonUtils');
 
 class Unify {
