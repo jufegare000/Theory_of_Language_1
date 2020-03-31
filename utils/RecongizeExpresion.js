@@ -28,6 +28,7 @@ const main = () => {
     // get Regular expression as a String
     let regEx = "((ac|d*b*c*c*))a+";
     let validity = validateSymbols(regEx);
+    
 }
 
 const evaluateStack = (aChar, stack) => {

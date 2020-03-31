@@ -2,7 +2,7 @@
     Victor Cardona Vera All Rights Reserved
 */
 
-
+let Or = require('../controller/thomson-creation/Or');
 
 function removeParenthesis(er){
     if(er.indexOf("(")!=-1){
@@ -53,5 +53,13 @@ function reCreateExpression(replacements, ex){
     return ex;
 }
 
+function createTree(expression){
+    let or = new Or("xx", "yy");
+    console.log(expression);
+    console.log(or);
+}
+
+
 let x = removeParenthesis("(a|b)+c.d|(a|a)|(a|a).(a|a)");
+createTree(x);
 console.log(x);
