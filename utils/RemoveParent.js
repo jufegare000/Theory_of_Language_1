@@ -77,7 +77,6 @@ function createListOfAtomics(expression){
         arrayOfGraphs.push(capturedObject)
         console.log(arrayOfGraphs);
     }
-    let or = new Or("xx", "yy");
     return arrayOfGraphs;
 }
 
@@ -88,7 +87,7 @@ function externalExpresions(lists, externalOperators){
 }
 
 
-let separatedExpression = removeParenthesis("(a.b)|(a*)|(a+).(a|b)");
+let separatedExpression = removeParenthesis("a|(b*)");
 console.log(separatedExpression);
 let lists = createListOfAtomics(separatedExpression);
 //let unified = createListOfAtomics(lists, separatedExpression.er);
