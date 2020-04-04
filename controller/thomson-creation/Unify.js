@@ -116,9 +116,7 @@ class Unify {
 
         this.utils.runEntireGraph(or3.list.returnFirst());
 
-        console.log("\n\n\n")
-        //or3.list.runByRight();
-        //console.log(or3.list.returnLast());
+        console.log("\n\n\n");
     }
 
 

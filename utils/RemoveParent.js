@@ -3,6 +3,9 @@
 */
 
 let Or = require('../controller/thomson-creation/Or');
+let Concat = require('../controller/thomson-creation/Concat');
+let Star = require('../controller/thomson-creation/Star');
+let Plus = require('../controller/thomson-creation/Plus');
 
 function removeParenthesis(er){
     if(er.indexOf("(")!=-1){
@@ -10,8 +13,8 @@ function removeParenthesis(er){
         let replaces=[];
         let count=0;
         
-        let indexReplace=1;
-        let finalExprss="";
+        let indexReplace=0;
+        let finalExprss=[];
         while (count<charz.length){
             if(charz[count]=="("){
                 let innerCount=count+1;
@@ -30,11 +33,11 @@ function removeParenthesis(er){
                 }
                 count=innerCount+1;
                 replaces.push(forReplace);
-                finalExprss+="aux"+indexReplace;
+                //finalExprss.push(indexReplace);
                 indexReplace++;
             }
             else{
-                finalExprss+=charz[count];
+                finalExprss.push(charz[count]);
                 count++;
             }
         }
@@ -47,19 +50,45 @@ function removeParenthesis(er){
 }
 
 function reCreateExpression(replacements, ex){
-    for (var count=1; i<=replacements.length; count++){
+    for (var count=0; i<=replacements.length; count++){
         ex=ex.replace("aux"+i,"("+replacements[count-1]+")")
     }
     return ex;
 }
 
-function createTree(expression){
+function createListOfAtomics(expression){
+    let arrayOfGraphs = [];
+    for(let i = 0; i< expression.replaces.length; i++){
+        let current = expression.replaces[i];
+        let capturedObject; 
+        if(current.indexOf(".")> 0){
+            //Is an AND
+            capturedObject = new Concat(current[0], current[2]);
+        }else if(current.indexOf("|")> 0){
+            //Is an OR
+            capturedObject = new Or(current[0], current[2]);
+        }else if(current.indexOf("*")>0){
+            //Is Star
+            capturedObject = new Star(current[0]);
+        }else if(current.indexOf("+")>0){
+            //Is Plus
+            capturedObject = new Plus(current[0]);
+        }
+        arrayOfGraphs.push(capturedObject)
+        console.log(arrayOfGraphs);
+    }
     let or = new Or("xx", "yy");
-    console.log(expression);
-    console.log(or);
+    return arrayOfGraphs;
+}
+
+function externalExpresions(lists, externalOperators){
+    let stack = [];
+    //for (let i = 0; i < exp)
+    //console.log(expe);
 }
 
 
-let x = removeParenthesis("(a|b)+c.d|(a|a)|(a|a).(a|a)");
-createTree(x);
-console.log(x);
+let separatedExpression = removeParenthesis("(a.b)|(a*)|(a+).(a|b)");
+console.log(separatedExpression);
+let lists = createListOfAtomics(separatedExpression);
+//let unified = createListOfAtomics(lists, separatedExpression.er);
