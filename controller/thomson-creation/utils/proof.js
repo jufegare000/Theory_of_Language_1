@@ -38,7 +38,6 @@ class Unifikate {
         thompsonAux = this.createStarOrPlus(firsExpression, topOfStack);
         stackTrace.pop();
       } else {
-        //let newNode = new Node(secondExpression);
         operator = stackTrace.pop();
         thompsonAux = this.createOrOrAnd(
           operator,
