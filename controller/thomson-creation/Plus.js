@@ -1,28 +1,28 @@
-let List = require('../../model/LDL');
-let DNode = require('../../model/DoubleNode');
+let DNode = require("../../model/DoubleNode");
 
-class Plus{
-    constructor(data){
-        this.list = new List();
-        this.createPlus(data);
-    }
+class Plus {
+  constructor(listOfNodes) {
+    this.createPlus(listOfNodes);
+  }
 
-    createPlus(data){
-        let first = new DNode("λ");
-        let second = new DNode(data);
-        let third = new DNode("λ");
-        let fourth = new DNode(null);
-        this.list.insertNode(first);
-        first.assignRight(second);
-        second.assignRight(third);
-        third.assignLeft(second);
-        third.assignRight(fourth);
-        this.list.insertNode(second);
-        this.list.insertNode(third);
-        this.list.insertNode(fourth);
-        this.list.runByRight();
-        //console.log(this.list);
-    }
+  createPlus(listOfNodes) {
+    let first = new DNode("λ");
+    let last = new DNode(null);
+
+    let firstOfTheList = listOfNodes.list.returnFirst();
+    let lastOfTheList = listOfNodes.list.returnLast();
+
+    lastOfTheList.assignData("λ");
+
+    first.assignRight(firstOfTheList);
+
+    lastOfTheList.assignLeft(firstOfTheList);
+    lastOfTheList.assignRight(last);
+
+    listOfNodes.list.setFirst(first);
+    listOfNodes.list.setLast(last);
+    listOfNodes.list.listOfNodes.runByRight();
+  }
 }
 
-module.exports= Plus;
+module.exports = Plus;

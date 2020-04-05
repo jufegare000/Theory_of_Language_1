@@ -1,31 +1,16 @@
-let List = require('../../model/LDL');
-let DNode = require('../../model/DoubleNode');
+class Concat {
+  constructor(data1, data2) {
+    this.createConcat(data1, data2);
+  }
 
-
-class Concat{
-    constructor(data1, data2){
-        this.list = new List();
-        this.createConcat(data1, data2)
-    }
-
-    createConcat(data1, data2){
-        let first = new DNode(data1);
-        let second = new DNode("λ");
-        let third = new DNode(data2);
-        let fourth = new DNode(null);
-        this.list.insertNode(first);
-        first.assignRight(second);
-        second.assignRight(third);
-        third.assignRight(fourth);
-        this.list.insertNode(second);
-        this.list.insertNode(third);
-        this.list.insertNode(fourth);
-        this.list.runByRight();
-        //console.log(this.list);
-    }
+  createConcat(list1, list2) {
+    let lastOfList1 = list1.list.returnLast();
+    let firstOfList2 = list2.list.returnFirst();
+    let lastOfList2 = list2.list.returnLast();
+    lastOfList1.assignData("λ");
+    lastOfList1.assignRight(firstOfList2);
+    this.list.setLast(lastOfList2);
+  }
 }
 
-module.exports= Concat;
-/* 
-let concat = new Concat();
-concat.createConcat("s", "r"); */
+module.exports = Concat;

@@ -1,31 +1,34 @@
-let List = require('../../model/LDL');
-let DNode = require('../../model/DoubleNode');
+let DNode = require("../../model/DoubleNode");
+let Utils = require("./utils/ThompsonUtils");
 
-class Star{
-    constructor(data){
-        this.list = new List();
-        this.createStar(data);
-    }
+class Star {
+  constructor(data) {
+    this.createStar(data);
+  }
 
-    createStar(data){
-        let first = new DNode("λ");
-        let second = new DNode(data);
-        let third = new DNode("λ");
-        let fourth = new DNode(null);
-        this.list.insertNode(first);
-        first.assignRight(second);
-        first.assignLeft(fourth);
-        second.assignRight(third);
-        third.assignLeft(second);
-        third.assignRight(fourth);
-        this.list.insertNode(second);
-        this.list.insertNode(third);
-        this.list.insertNode(fourth);
-        this.list.runByRight();
-        console.log(this.list);
-    }
+  createStar(listOfNodes) {
+    let first = new DNode("λ");
+    let last = new DNode(null);
+
+    let firstOfList = listOfNodes.list.returnFirst();
+    let lastOfList = listOfNodes.list.returnLast();
+
+    lastOfList.assignData("λ");
+
+    first.assignRight(firstOfList);
+    first.assignLeft(last);
+
+    lastOfList.assignLeft(firstOfList);
+    lastOfList.assignRight(last);
+
+    listOfNodes.list.setFirst(first);
+    listOfNodes.list.setLast(last);
+    let utils = new Utils();
+    utils.runEntireGraph(listOfNodes);
+    console.log(this.list);
+  }
 }
 
-module.exports= Star;
+module.exports = Star;
 
 // let star = new Star("x", "s");

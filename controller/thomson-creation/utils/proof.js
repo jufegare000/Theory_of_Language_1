@@ -31,7 +31,10 @@ class Unifikate {
   evaluateInStack(stackTrace, secondExpression) {
     let operator = "";
     let thompsonAux;
-    while (stackTrace[length - 1] !== "|" || stackTrace[length - 1] !== ".") {
+    while (
+      stackTrace[stackTrace.length - 1] !== "|" ||
+      stackTrace[stackTrace.length - 1] !== "."
+    ) {
       let firsExpression = stackTrace.pop();
       let topOfStack = stackTrace[length - 1];
       if (topOfStack === "*" || topOfStack === "+") {
