@@ -1,93 +1,94 @@
 class InfixToPreFix {
   constructor() {
-    this.operators = [".", "*", "+", "|", ")"];
-
-    this.expressionIn = "";
-    this.expressionPre = "";
+    this.prefixExpression = "";
   }
 
-  inToPre(infix) {
-    let stackIn = [],
-      stackTra = [],
-      stackPre = [];
-    let x, y;
-    //convert expression to stack
-    stackIn = Array.from(infix);
-    while (!(stackIn.length === 0)) {
-      x = stackIn.pop();
-      if (this.operators.includes(x)) {
-        while (
-          !(stackTra === 0) &&
-          this.priorityInStack(stackTra[stackTra.length - 1]) >
-            this.priorityOutStack(x)
-        ) {
-          y = stackTra.pop();
-          stackPre.push(y);
-        }
-        stackTra.push(x);
-      } else if (x === "(") {
-          console.log("kepaso?", stackTra);
-        while (
-          (stackTra.length > 0) &&
-         ( stackTra[stackTra.length - 1] != ")")
-        ) {
-          y = stackTra.pop();
-          console.log("a ver: ", y);
-          stackPre.push(y);
-        }
-        y = stackTra.pop();
+  infixToPrez(infixExpr) {
+    let sizeOfExpression = infixExpr.length;
+    let stackTrace = [];
+    for (
+      sizeOfExpression = sizeOfExpression - 1;
+      sizeOfExpression >= 0;
+      sizeOfExpression--
+    ) {
+      let currentCharacter = infixExpr.charAt(sizeOfExpression);
+      switch (currentCharacter) {
+        case "|":
+          this.gotOperator(currentCharacter, 1, ")", stackTrace);
+          break;
+        case ".":
+          this.gotOperator(currentCharacter, 1, ")", stackTrace);
+          break;
+        case "+":
+        case "*":
+          this.gotOperator(currentCharacter, 3, ")", stackTrace);
+          break;
+        case ")":
+          stackTrace.push(currentCharacter);
+          break;
+        case "(":
+          this.gotParenthesis(")", stackTrace);
+          break;
+        default:
+          this.prefixExpression = currentCharacter + this.prefixExpression;
+          break;
+      }
+    }
+    while (!(stackTrace.length === 0)) {
+      this.prefixExpression = stackTrace.pop() + this.prefixExpression;
+    }
+    let prefixExpAux = this.prefixExpression;
+    this.prefixExpression = "";
+    return prefixExpAux;
+  }
+
+  gotOperator(opThis, precedence, charX, stackTrace) {
+    while (!(stackTrace.length === 0)) {
+      let opTop = stackTrace.pop();
+      if (opTop === charX) {
+        stackTrace.push(opTop);
+        break;
       } else {
-        stackPre.push(x);
-      }
-      while (!(stackTra.length === 0)) {
-        y = stackTra.pop();
-        stackPre.push(y);
-      }
-      while (!(stackPre.length === 0)) {
-        y = stackPre.pop();
-        console.log(y);
+        let precedence2;
+        if (opTop === "|") {
+          precedence2 = 1;
+        } else if (opTop === ".") {
+          precedence2 = 2;
+        } else {
+          precedence2 = 3;
+        }
+        if (precedence2 > precedence && charX === "(") {
+          stackTrace.push(opTop);
+          break;
+        } else if (precedence2 <= precedence && charX === ")") {
+          stackTrace.push(opTop);
+          break;
+        } else {
+          if (charX === ")") {
+            this.prefixExpression = opTop + this.prefixExpression;
+          } else {
+            this.prefixExpression = this.prefixExpression + opTop;
+          }
+        }
       }
     }
+    stackTrace.push(opThis);
   }
 
-  priorityInStack(val) {
-    switch (val) {
-      case "*":
-        return 2;
+  gotParenthesis(charX, stackTrace) {
+    while (!(stackTrace.length === 0)) {
+      let currentCharacter = stackTrace.pop();
+      if (currentCharacter === charX) {
         break;
-      case "+":
-        return 1;
-        break;
-      case "|":
-        return 1;
-        break;
-      case ".":
-        return 1;
-      case ")":
-        return 0;
-        break;
-    }
-  }
-
-  priorityOutStack(val) {
-    switch (val) {
-      case "*":
-        return 2;
-        break;
-      case "+":
-        return 1;
-        break;
-      case "|":
-        return 1;
-        break;
-      case ".":
-        return 1;
-      case ")":
-        return 4;
-        break;
+      } else {
+        if (charX === ")") {
+          this.prefixExpression = currentCharacter + this.prefixExpression;
+        } else {
+          this.prefixExpression = this.prefixExpression + currentCharacter;
+        }
+      }
     }
   }
 }
 
-let Infx = new InfixToPreFix();
-Infx.inToPre("(a+b)");
+module.exports = InfixToPreFix;
