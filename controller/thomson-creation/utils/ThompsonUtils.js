@@ -12,42 +12,45 @@ class ThompsonUtils {
   }
 
   runByLeft(pointer) {
-    let leftPointer = pointer;
-    let rightPointer = pointer;
-    if (leftPointer != null) {
-      if (!this.visited.includes(leftPointer)) {
-        this.visited.push(leftPointer);
-        leftPointer.assignIdentifier(this.index);
+    let leftPointer;
+    let rightPointer;
+    if (pointer !== null) {
+      if (!this.visited.includes(pointer)) {
+        this.visited.push(pointer);
+        pointer.assignIdentifier(this.index);
         this.index++;
+        this.printPointer(pointer);
       }
       console.log("Left");
-      this.printPointer(leftPointer);
-      rightPointer = leftPointer.returnLeft();
-      if (!this.visited.includes(rightPointer)) {
-        this.runByLeft(leftPointer.returnLeft());
-      } else if (rightPointer !== null) {
-        this.printPointer(rightPointer);
+      leftPointer = pointer.returnLeft();
+      rightPointer = pointer.returnRight();
+      if (!this.visited.includes(leftPointer)) {
+        this.runByLeft(leftPointer);
       }
-      this.runByRight(leftPointer.returnRight());
+      if (!this.visited.includes(rightPointer)) {
+        this.runByRight(rightPointer);
+      }
     }
   }
 
   runByRight(pointer) {
-    let rightPointer = pointer;
-    let leftPointer = pointer;
-    if (rightPointer != null) {
-      if (!this.visited.includes(rightPointer)) {
-        this.visited.push(rightPointer);
-        rightPointer.assignIdentifier(this.index);
+    let leftPointer;
+    let rightPointer;
+    if (pointer != null) {
+      console.log("Right");
+
+      if (!this.visited.includes(pointer)) {
+        this.visited.push(pointer);
+        pointer.assignIdentifier(this.index);
         this.index++;
+        this.printPointer(pointer);
       }
 
-      leftPointer = rightPointer.returnLeft();
+      leftPointer = pointer.returnLeft();
       if (!this.visited.includes(rightPointer)) {
         this.runByLeft(leftPointer);
       }
-      console.log("Right");
-      this.printPointer(rightPointer);
+
       rightPointer = rightPointer.returnRight();
       this.runByRight(rightPointer);
     }
