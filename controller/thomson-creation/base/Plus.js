@@ -1,8 +1,7 @@
-let DNode = require("../../model/DoubleNode");
-
+let DNode = require("../../../model/DoubleNode");
 class Plus {
   constructor(listOfNodes) {
-    this.createPlus(listOfNodes);
+    return this.createPlus(listOfNodes);
   }
 
   createPlus(listOfNodes) {
@@ -22,6 +21,7 @@ class Plus {
     listOfNodes.list.setFirst(first);
     listOfNodes.list.setLast(last);
     listOfNodes.list.listOfNodes.runByRight();
+    return listOfNodes;
   }
 }
 

@@ -22,7 +22,7 @@ class LDL {
   }
 
   insertNode(nodeX) {
-    nodeX.assignIdentifier(this.noOfNodes);
+    //nodeX.assignIdentifier(this.noOfNodes);
     if (this.first === null) {
       this.first = nodeX;
       this.last = nodeX;

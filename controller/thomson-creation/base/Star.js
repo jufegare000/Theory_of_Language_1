@@ -1,9 +1,7 @@
-let DNode = require("../../model/DoubleNode");
-let Utils = require("./utils/ThompsonUtils");
-
+let DNode = require("../../../model/DoubleNode");
 class Star {
   constructor(data) {
-    this.createStar(data);
+    return this.createStar(data);
   }
 
   createStar(listOfNodes) {
@@ -11,6 +9,7 @@ class Star {
     let last = new DNode(null);
 
     let firstOfList = listOfNodes.list.returnFirst();
+    listOfNodes;
     let lastOfList = listOfNodes.list.returnLast();
 
     lastOfList.assignData("λ");
@@ -23,9 +22,7 @@ class Star {
 
     listOfNodes.list.setFirst(first);
     listOfNodes.list.setLast(last);
-    let utils = new Utils();
-    utils.runEntireGraph(listOfNodes);
-    console.log(this.list);
+    return listOfNodes;
   }
 }
 

@@ -1,8 +1,7 @@
-let DNode = require("../../model/DoubleNode");
-
+let DNode = require("../../../model/DoubleNode");
 class Or {
   constructor(list1, list2) {
-    this.createOr(list1, list2);
+    return this.createOr(list1, list2);
   }
 
   createOr(list1, list2) {
@@ -25,6 +24,7 @@ class Or {
 
     list1.list.setFirst(first);
     list1.list.setLast(last);
+    return list1;
   }
 }
 

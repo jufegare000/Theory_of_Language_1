@@ -80,10 +80,10 @@ class Unifikate {
       }
     }
     let lastExpression = this.finalList.pop();
-    this.runGraph(lastExpression);
+    this.reAssignIndexes(lastExpression);
   }
 
-  runGraph(lastExpression) {
+  reAssignIndexes(lastExpression) {
     let utils = new Utils();
     utils.setIdentifiers(lastExpression.list.returnFirst(), 0);
     console.log(lastExpression.list.returnLast());

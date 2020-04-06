@@ -1,41 +1,41 @@
-class DoubleNode{
-    constructor(data){
-        this.rightNode = null;
-        this.leftNode = null;
-        this.data = data;
-        this.identifier = null;
-    }
+class DoubleNode {
+  constructor(data) {
+    this.rightNode = null;
+    this.leftNode = null;
+    this.data = data;
+    this.identifier = 0;
+  }
 
-    assignData(data){
-        this.data = data;
-    }
+  assignData(data) {
+    this.data = data;
+  }
 
-    assignIdentifier(value){
-        this.identifier = value;
-    }
+  assignIdentifier(value) {
+    this.identifier = value;
+  }
 
-    assignRight(node){
-        this.rightNode = node;
-    }
-    assignLeft(node){
-        this.leftNode = node;
-    }
+  assignRight(node) {
+    this.rightNode = node;
+  }
+  assignLeft(node) {
+    this.leftNode = node;
+  }
 
-    returnData(){
-        return this.data;
-    }
+  returnData() {
+    return this.data;
+  }
 
-    returnRight(){
-        return this.rightNode;
-    }
+  returnRight() {
+    return this.rightNode;
+  }
 
-    returnLeft(){
-        return this.leftNode;
-    }
+  returnLeft() {
+    return this.leftNode;
+  }
 
-    returnIdentifier(){
-        return this.identifier;
-    }
+  returnIdentifier() {
+    return this.identifier;
+  }
 }
 
 module.exports = DoubleNode;

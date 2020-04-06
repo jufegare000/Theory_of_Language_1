@@ -1,6 +1,6 @@
 class Concat {
   constructor(data1, data2) {
-    this.createConcat(data1, data2);
+    return this.createConcat(data1, data2);
   }
 
   createConcat(list1, list2) {
@@ -9,7 +9,8 @@ class Concat {
     let lastOfList2 = list2.list.returnLast();
     lastOfList1.assignData("λ");
     lastOfList1.assignRight(firstOfList2);
-    this.list.setLast(lastOfList2);
+    list1.list.setLast(lastOfList2);
+    return list1;
   }
 }
 

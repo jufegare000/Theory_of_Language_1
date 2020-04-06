@@ -1,0 +1,7 @@
+class ToDeterministic {
+    constructor() { }
+    
+    convertToDeterministic() {
+        
+    }
+}
