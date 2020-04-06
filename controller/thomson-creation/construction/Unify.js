@@ -45,8 +45,10 @@ class Unifikate {
         }
       }
     }
-    if (stackTrace.length === 0) return stackTrace;
-    else this.completeThompson(stackTrace);
+    if (stackTrace.length === 0) {
+      let lastExpression = this.finalList.pop();
+      this.reAssignIndexes(lastExpression);
+    } else this.completeThompson(stackTrace);
   }
 
   completeThompson(stackTrace) {
@@ -209,7 +211,7 @@ class Unifikate {
 }
 
 let Infx = new InfixToPreFix();
-let infixExpre = Infx.infixToPrez("(a|b)*.c");
+let infixExpre = Infx.infixToPrez("(a|b)");
 let Proof = new Unifikate();
 let thomp = Proof.unify(infixExpre);
 //Proof.evaluateStack(thomp);
