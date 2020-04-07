@@ -5,6 +5,7 @@ let Concat = require("../base/Concat");
 let Or = require("../base/Or");
 let Node = require("../base/Unique");
 let Utils = require("../utils/ThompsonUtils");
+let RoutesConstruction = require("../construction/ToDeterministic");
 class Unifikate {
   constructor() {
     this.operators = ["*", "+", "|", "."];
@@ -87,8 +88,11 @@ class Unifikate {
 
   reAssignIndexes(lastExpression) {
     let utils = new Utils();
-    utils.setIdentifiers(lastExpression.list.returnFirst(), 0);
-    console.log(lastExpression.list.returnLast());
+    let routesClass = new RoutesConstruction();
+
+    let firstNode = lastExpression.list.returnFirst();
+    utils.setIdentifiers(firstNode, 0);
+    routesClass.convertToDeterministic(firstNode);
   }
 
   evaluateInStack(firstExpression, secondExpression, operator, stackTrace) {
@@ -165,48 +169,6 @@ class Unifikate {
       }
     }
     return generatedList;
-  }
-
-  evaluateStack(stackTrace) {
-    let listNodeAux;
-    let finalList;
-    let thompsonAux;
-    let operator;
-    while (stackTrace.length > 0) {
-      let topOfStack = stackTrace.pop();
-      if (topOfStack === "*" || topOfStack === "+") {
-        thompsonAux = this.finalList.pop();
-        thompsonAux = this.createStarOrPlus(thompsonAux, topOfStack);
-      } else if (topOfStack === "|" || topOfStack === ".") {
-        let secondExpression = this.finalList.pop();
-        let firsExpression = this.finalList.pop();
-        thompsonAux = this.createOrOrAnd(
-          topOfStack,
-          firsExpression,
-          secondExpression
-        );
-        this.finalList.push(thompsonaux);
-      } else {
-        operator = stackTrace.pop();
-        if (operator === "*" || operator === "+") {
-          thompsonAux = this.createStarOrPlus(topOfStack);
-          this.finalList.push(thompsonAux);
-        } else {
-          let newNode = new Node(topOfStack);
-          thompsonAux = this.createOrOrAnd(
-            operator,
-            this.finalList.pop(),
-            newNode
-          );
-          this.finalList.push(thompsonAux);
-        }
-      }
-      let secondExpression = stackTrace.pop();
-      if (secondExpression === "*") {
-        listNodeAux = new Node(firstExp);
-        finalList = new Star(listNodeAux);
-      }
-    }
   }
 }
 
