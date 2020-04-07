@@ -77,7 +77,7 @@ class ToDeterministic {
   setAcceptationOrNot(data, node) {
     if (data === null) {
       this.addEdge(this.currentNode, { acceptation: 1, node });
-    } else {
+    } else if (this.currentNode === node) {
       this.addEdge(this.currentNode, { acceptation: 0, node });
     }
   }
