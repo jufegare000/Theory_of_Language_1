@@ -1,7 +1,9 @@
 let State = require("../../../model/states/State");
 
 class CreateStates {
-  constructor() {}
+  constructor() {
+    this.states = [];
+  }
 
   createStates(mapOfNodes) {
     //Create states using the map
@@ -30,6 +32,14 @@ class CreateStates {
         }
       }
     }
+  }
+
+  setCharToState(map, char) {
+    map.set(char, []);
+  }
+
+  setTransitionToChar(map, node, data) {
+    mapa.get(data).push(node);
   }
 }
 

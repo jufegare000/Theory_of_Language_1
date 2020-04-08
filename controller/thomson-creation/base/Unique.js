@@ -1,5 +1,5 @@
-let DNode = require("../../../model/DoubleNode");
-let List = require("../../../model/LDL");
+let DNode = require("../../../model/thompson-nodes/DoubleNode");
+let List = require("../../../model/thompson-nodes/LDL");
 
 class Unique {
   constructor(data) {

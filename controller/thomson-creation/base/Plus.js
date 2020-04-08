@@ -1,4 +1,4 @@
-let DNode = require("../../../model/DoubleNode");
+let DNode = require("../../../model/thompson-nodes/DoubleNode");
 class Plus {
   constructor(listOfNodes) {
     return this.createPlus(listOfNodes);

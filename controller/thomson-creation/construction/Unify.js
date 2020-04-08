@@ -177,6 +177,6 @@ class Unifikate {
 }
 
 let Infx = new InfixToPreFix();
-let infixExpre = Infx.infixToPrez("(a|b)*");
+let infixExpre = Infx.infixToPrez("(r|s)*.c");
 let Proof = new Unifikate();
 let thomp = Proof.unify(infixExpre);
