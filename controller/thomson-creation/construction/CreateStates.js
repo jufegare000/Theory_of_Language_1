@@ -3,6 +3,7 @@ let State = require("../../../model/states/State");
 class CreateStates {
   constructor() {
     this.states = [];
+    this.mapOfNodes;
   }
 
   createStates(mapOfNodes) {
@@ -11,35 +12,59 @@ class CreateStates {
   }
 
   convertKeyOfMapInState(mapOfNodes) {
-    let keys = mapOfNodes.keys();
-    let characters = new Map();
+    this.mapOfNodes = mapOfNodes;
+    let entries = mapOfNodes.entries().next().value;
+    let firsValues = entries[1];
+    this.createStateName(firsValues);
+  }
 
-    let name = "";
+  createStateName(values) {
     let newState = new State();
-    for (let i of keys) {
-      let currentValues = mapOfNodes.get(i);
-      for (let j = 0; j < currentValues.length; j++) {
-        let current = currentValues[j];
-        let char = current.node.returnData();
-        if (char !== "λ" && char !== null) {
-          characters.set(char, current.node.returnRight());
-        }
-        name = current.node.identifier;
-        let state = current.acceptation;
-
-        if (state === 1) {
-          newState.setAcceptation();
-        }
+    let name = "";
+    for (let i = 0; i < values.length; i++) {
+      name += values[i].node.returnIdentifier();
+      if (values[i].acceptation === 1) {
+        newState.setAcceptation();
       }
     }
+    newState.setName(name);
+    this.states.push(newState);
+    this.createOtherStatesFor(values);
   }
 
-  setCharToState(map, char) {
-    map.set(char, []);
+  createOtherStatesFor(values) {
+    let mapOfNextsNodes = new Map();
+    let entries = [];
+    let data;
+    let currentNode;
+    for (let i = 0; i < values.length; i++) {
+      currentNode = values[i].node;
+      data = currentNode.returnData();
+      if (data !== "λ" && !entries.includes(data) && data !== null) {
+        mapOfNextsNodes.set(data, []);
+        mapOfNextsNodes.get(data).push(currentNode.returnRight());
+        entries.push(data);
+      } else if (data !== "λ" && data !== null) {
+        mapOfNextsNodes.get(data).push(currentNode, currentNode.returnRight());
+        entries.push(data);
+      }
+    }
+    this.createStatesFroGeneratedMap(mapOfNextsNodes);
   }
 
-  setTransitionToChar(map, node, data) {
-    mapa.get(data).push(node);
+  createStatesFroGeneratedMap(mapOfNextsNodes) {
+    let newTranstions = [];
+    let keys = mapOfNextsNodes.keys();
+    for (let i of keys) {
+      let vlauesOfCurrentMap = mapOfNextsNodes.get(i);
+      for (let j of vlauesOfCurrentMap) {
+        let currentValuesOfCurrentMap = j;
+        for (let k = 0; k < j.length; k++) {
+          vlauesOfCurrentMap.push(j[k]);
+        }
+      }
+      console.log(vlauesOfCurrentMap);
+    }
   }
 }
 

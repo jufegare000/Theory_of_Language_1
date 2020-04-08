@@ -26,12 +26,12 @@ class State {
     return this.transtions;
   }
 
-  setTransition(key, state) {
-    this.transtions.set(key, state);
+  setTransition(key) {
+    this.transtions.set(key, []);
   }
 
   updateTransition(key, state) {
-    this.transtions.get(key) = state;
+    this.transtions.get(key).push(state);
   }
 }
 module.exports = State;
