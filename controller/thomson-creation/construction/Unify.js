@@ -5,11 +5,14 @@ let Concat = require("../base/Concat");
 let Or = require("../base/Or");
 let Node = require("../base/Unique");
 let Utils = require("../utils/ThompsonUtils");
-let RoutesConstruction = require("../construction/ToDeterministic");
+let RoutesConstruction = require("./StoreNodesAndRoutes");
+let CreateStates = require("./CreateStates");
+
 class Unifikate {
   constructor() {
     this.operators = ["*", "+", "|", "."];
     this.finalList = [];
+    this.CreateStates = new CreateStates();
   }
 
   unify(regex) {
@@ -92,7 +95,8 @@ class Unifikate {
 
     let firstNode = lastExpression.list.returnFirst();
     utils.setIdentifiers(firstNode, 0);
-    routesClass.convertToDeterministic(firstNode);
+    let routes = routesClass.convertToDeterministic(firstNode);
+    this.CreateStates.createStates(routes);
   }
 
   evaluateInStack(firstExpression, secondExpression, operator, stackTrace) {
@@ -173,8 +177,6 @@ class Unifikate {
 }
 
 let Infx = new InfixToPreFix();
-let infixExpre = Infx.infixToPrez("(a|b)");
+let infixExpre = Infx.infixToPrez("(a|b)*");
 let Proof = new Unifikate();
 let thomp = Proof.unify(infixExpre);
-//Proof.evaluateStack(thomp);
-console.log(thomp);
