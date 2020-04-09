@@ -14,6 +14,7 @@ class CreateStates {
   createStates(mapOfNodes) {
     //Create states using the map
     this.convertKeyOfMapInState(mapOfNodes);
+    return this.states;
   }
 
   convertKeyOfMapInState(mapOfNodes) {
@@ -32,7 +33,7 @@ class CreateStates {
   createState(name, values) {
     let newState = new State();
     for (let i = 0; i < values.length; i++) {
-      if (values[i].acceptation === 1) {
+      if (values[i].returnData() === null) {
         newState.setAcceptation();
       }
     }
@@ -58,7 +59,7 @@ class CreateStates {
     let data;
     let currentNode;
     for (let i = 0; i < values.length; i++) {
-      currentNode = values[i].node;
+      currentNode = values[i];
       data = currentNode.returnData();
       if (data !== "λ" && !entries.includes(data) && data !== null) {
         mapOfNextsNodes.set(data, []);
@@ -74,6 +75,7 @@ class CreateStates {
 
   createStatesFromGeneratedMap(mapOfNextsNodes) {
     let newTranstions = [];
+    let trans;
     let keys = mapOfNextsNodes.keys();
     for (let symbol of keys) {
       let vlauesOfCurrentMap = mapOfNextsNodes.get(symbol);
@@ -83,13 +85,14 @@ class CreateStates {
         //this.readyNodes.push(j);
         newTranstions = this.puhsing(newTranstions, valuesInBigMap);
       }
-      this.synthesizeArray(newTranstions);
+      trans = this.synthesizeArray(newTranstions);
       this.pendingStates.push({
         fromState: this.currentState,
         symbol: symbol,
-        withTransitions: newTranstions,
+        withTransitions: trans,
       });
       newTranstions = [];
+      trans = null;
     }
     this.createPendingStates();
   }
@@ -111,7 +114,7 @@ class CreateStates {
       if (this.names.includes(name)) {
         stateTo = this.findStateByName(name);
         console.log(
-          "Will create transition with symbol ",
+          " create transition with symbol ",
           currentPending.symbol,
           "from state",
           stateFrom.getName(),
@@ -143,14 +146,14 @@ class CreateStates {
         this.createOtherStatesFor(currentPending.withTransitions);
       }
     }
-    console.log(this.states);
   }
 
   createStateName(transitionsArray) {
     let name = "";
     for (let i = 0; i < transitionsArray.length; i++) {
-      name += transitionsArray[i].node.returnIdentifier();
+      name += transitionsArray[i].returnIdentifier();
     }
+    console.log(name);
     return name;
   }
 
@@ -158,8 +161,9 @@ class CreateStates {
     let visited = [];
     let finalArray = [];
     for (let i = 0; i < arrayx.length; i++) {
-      if (!visited.includes(arrayx[i])) {
+      if (!visited.includes(arrayx[i].returnIdentifier())) {
         finalArray.push(arrayx[i]);
+        visited.push(arrayx[i].returnIdentifier());
       }
     }
     return finalArray;

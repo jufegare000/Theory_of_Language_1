@@ -99,16 +99,16 @@ class StoreNodesAndRoutes {
   setAcceptationOrNot(data, node) {
     if (this.currentNode === node && this.currentNode.returnData() !== "λ") {
       if (data === null) {
-        this.addEdge(this.currentNode, { acceptation: 1, node });
+        this.addEdge(this.currentNode, node);
       } else {
-        this.addEdge(this.currentNode, { acceptation: 0, node });
+        this.addEdge(this.currentNode, node);
       }
     } else if (this.currentNode.returnData() !== "λ") {
       return;
     } else if (data === null) {
-      this.addEdge(this.currentNode, { acceptation: 1, node });
+      this.addEdge(this.currentNode, node);
     } else {
-      this.addEdge(this.currentNode, { acceptation: 0, node });
+      this.addEdge(this.currentNode, node);
     }
   }
 }

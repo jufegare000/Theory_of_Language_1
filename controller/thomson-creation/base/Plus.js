@@ -20,7 +20,6 @@ class Plus {
 
     listOfNodes.list.setFirst(first);
     listOfNodes.list.setLast(last);
-    listOfNodes.list.listOfNodes.runByRight();
     return listOfNodes;
   }
 }
