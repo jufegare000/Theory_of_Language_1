@@ -26,8 +26,6 @@ class CreateStates {
   connect(values) {
     let name = this.createStateName(values);
     let state = this.createState(name, values);
-    this.currentState = state;
-    //let transitionsForState = this.createTransitionsMap(values);
     this.createOtherStatesFor(values);
   }
 
@@ -43,30 +41,6 @@ class CreateStates {
     this.names.push(name);
     this.currentState = newState;
     return newState;
-  }
-
-  createTransitionsMap(values) {
-    let mapOfNextsNodes = new Map();
-    let entries = [];
-    let data;
-    let currentNode;
-    for (let i = 0; i < values.length; i++) {
-      currentNode = values[i].node;
-      data = currentNode.returnData();
-      if (data !== "λ" && !entries.includes(data) && data !== null) {
-        mapOfNextsNodes.set(data, []);
-        mapOfNextsNodes.get(data).push(currentNode.returnRight());
-        entries.push(data);
-      } else if (data !== "λ" && data !== null) {
-        mapOfNextsNodes.get(data).push(currentNode, currentNode.returnRight());
-        entries.push(data);
-      }
-    }
-    this.castTransitionByMap(mapOfNextsNodes);
-  }
-
-  castTransitionByMap(mapOfNextsNodes) {
-    let transitions = this.createStatesFroGeneratedMap(mapOfNextsNodes);
   }
 
   findStateByName(name) {
@@ -95,19 +69,19 @@ class CreateStates {
         entries.push(data);
       }
     }
-    newStates = this.createStatesFroGeneratedMap(mapOfNextsNodes);
+    newStates = this.createStatesFromGeneratedMap(mapOfNextsNodes);
   }
 
-  createStatesFroGeneratedMap(mapOfNextsNodes) {
+  createStatesFromGeneratedMap(mapOfNextsNodes) {
     let newTranstions = [];
     let keys = mapOfNextsNodes.keys();
     for (let symbol of keys) {
       let vlauesOfCurrentMap = mapOfNextsNodes.get(symbol);
       console.log("for key: ", symbol);
       for (let j of vlauesOfCurrentMap) {
-        let valueInBigMap = this.mapOfNodes.get(j);
-        this.readyNodes.push(j);
-        newTranstions = this.puhsing(newTranstions, valueInBigMap);
+        let valuesInBigMap = this.mapOfNodes.get(j);
+        //this.readyNodes.push(j);
+        newTranstions = this.puhsing(newTranstions, valuesInBigMap);
       }
       this.synthesizeArray(newTranstions);
       this.pendingStates.push({
@@ -136,14 +110,38 @@ class CreateStates {
       let name = this.createStateName(currentPending.withTransitions);
       if (this.names.includes(name)) {
         stateTo = this.findStateByName(name);
+        console.log(
+          "Will create transition with symbol ",
+          currentPending.symbol,
+          "from state",
+          stateFrom.getName(),
+          "to state: ",
+          stateTo.getName()
+        );
+        let transition = new Transsition(
+          stateFrom,
+          currentPending.symbol,
+          stateTo
+        );
+        stateFrom.setTransition(transition);
       } else {
         stateTo = this.createState(name, currentPending.withTransitions);
+        console.log(
+          "Will create transition with symbol ",
+          currentPending.symbol,
+          "from state",
+          stateFrom.getName(),
+          "to state: ",
+          stateTo.getName()
+        );
+        let transition = new Transsition(
+          stateFrom,
+          currentPending.symbol,
+          stateTo
+        );
+        stateFrom.setTransition(transition);
+        this.createOtherStatesFor(currentPending.withTransitions);
       }
-
-      let trantion = new Transsition(stateFrom, currentPending.symbol, stateTo);
-
-      stateFrom.setTransition(trantion);
-      this.createOtherStatesFor(currentPending.withTransitions);
     }
     console.log(this.states);
   }
