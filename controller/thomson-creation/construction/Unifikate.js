@@ -149,15 +149,19 @@ class Unifikate {
       stackTrace.push(secondExpression);
     } else {
       charAux = operatorAux;
-      operatorAux = stackTrace.pop();
-      this.singleCharToAdd(charAux, operatorAux);
+      if (this.operators.includes(charAux)) {
+        stackTrace.push(charAux);
+      } else {
+        operatorAux = stackTrace.pop();
+        this.singleCharToAdd(charAux, operatorAux);
+      }
     }
   }
 
   singleCharToAdd(char, operator) {
     let newNode = new Unique(char);
     let firstExpression = this.finalList.pop();
-    let finalaux = this.createOrOrAnd(operator, newNode, firstExpression);
+    let finalaux = this.createOrOrAnd(operator, firstExpression, newNode);
     this.finalList.push(finalaux);
   }
 
