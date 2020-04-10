@@ -102,12 +102,8 @@ GraficadorAFD.prototype.getInvalidChars = function (stringIn) {
 };
 
 GraficadorAFD.prototype.hasEntries = function (input) {
-  let initialState = this.states[0];
-  let transisitons = initialState.getTransitions();
-  for (var j = 0; j < transisitons.length; j++) {
-    if (transisitons[j].getSymbol() == input) {
-      return true;
-    }
+  if (this.expr.includes(input)) {
+    return true;
   }
   return false;
 };
@@ -125,7 +121,7 @@ GraficadorAFD.prototype.getStateFromEntry = function (currentState, entry) {
   if (currentState !== null) {
     let transitions = currentState.getTransitions();
     for (var i = 0; i < transitions.length; i++) {
-      if (transitions[i].getSymbol() == entry) {
+      if (transitions[i].getSymbol() === entry) {
         return transitions[i].getStateTo();
       }
     }
