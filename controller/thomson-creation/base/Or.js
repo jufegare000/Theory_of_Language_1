@@ -1,5 +1,5 @@
-let DNode = require("../../../model/thompson-nodes/DoubleNode");
-class Or {
+/* let DNode = require("../../../model/thompson-nodes/DoubleNode");*/
+class Or { 
   constructor(list1, list2) {
     return this.createOr(list1, list2);
   }

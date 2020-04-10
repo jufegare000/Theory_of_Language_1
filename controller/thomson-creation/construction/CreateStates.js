@@ -1,5 +1,5 @@
-let State = require("../../../model/states/State");
-let Transsition = require("../../../model/states/Transition");
+/* let State = require("../../../model/states/State");
+let Transsition = require("../../../model/states/Transition"); */
 
 class CreateStates {
   constructor() {
@@ -121,7 +121,7 @@ class CreateStates {
           "to state: ",
           stateTo.getName()
         );
-        let transition = new Transsition(
+        let transition = new Transition(
           stateFrom,
           currentPending.symbol,
           stateTo
@@ -137,7 +137,7 @@ class CreateStates {
           "to state: ",
           stateTo.getName()
         );
-        let transition = new Transsition(
+        let transition = new Transition(
           stateFrom,
           currentPending.symbol,
           stateTo

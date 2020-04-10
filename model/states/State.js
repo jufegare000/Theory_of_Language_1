@@ -8,7 +8,9 @@ class State {
   setAcceptation() {
     this.state = 1;
   }
-
+  getAcceptation(){
+    return this.state;
+  }
   setName(name) {
     this.name = name;
   }

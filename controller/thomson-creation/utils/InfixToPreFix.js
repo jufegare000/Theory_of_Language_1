@@ -1,5 +1,5 @@
 class InfixToPreFix {
-  constructor() {
+    constructor() {
     this.prefixExpression = "";
   }
 
