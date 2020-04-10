@@ -1,6 +1,4 @@
-/*
-    Victor Cardona Vera All Rights Reserved
-*/
+
 
 let Or = require("../controller/thomson-creation/Or");
 let Concat = require("../controller/thomson-creation/Concat");

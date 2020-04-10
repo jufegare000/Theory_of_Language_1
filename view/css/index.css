@@ -9,18 +9,31 @@
 .align-center{
     text-align: center;
 }
-
 .display-always{
     display: initial !important;
 }
-
+s {
+    padding: 80px;
+  }
+p {
+    
+    background-color: #4578d6;
+    margin: 10px;
+  }
+h1 {
+    color: black;
+    font-family: cursive;
+    font-size: 200%;
+  
+  }
 .nav-wrapper.green .brand-logo{
-    font-size: 16px !important;
-    background-color: #3C1156 
+    font-size: 200% !important;
+    background-color: rgb(0, 0, 0) 
 }
 
 .padding-nav{
     padding-left: 65px;
+    
 }
 
 .content-input{
@@ -31,6 +44,7 @@
 
 #txtExpresion{
     font-size: 24px;
+    
 }
 
 .btn-process{
@@ -38,7 +52,7 @@
 }
 
 .nav-wrapper.green #title-with-afd{
-    background-color: #3C1156 !important;
+    background-color: rgb(70, 90, 119) !important;
     display: none;
 }
 
@@ -107,6 +121,9 @@ background-color: rgba(255,255,255,0.2) !important;
 #errror-hilera{
     color:#F8103F;
 }
+#text_color{
+    color:#111;
+}
 
 .oculto{
     display: none;
@@ -133,8 +150,8 @@ background-color: rgba(255,255,255,0.2) !important;
     width: 100%;
 }
 
-}
+
 
 .green {
-    background-color: #3C1156!important;
+    background-color: rgb(87, 118, 131)!important;
 }

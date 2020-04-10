@@ -1,4 +1,4 @@
-let DNode = require("../../../model/thompson-nodes/DoubleNode");
+/* let DNode = require("../../../model/thompson-nodes/DoubleNode"); */
 class Star {
   constructor(data) {
     return this.createStar(data);

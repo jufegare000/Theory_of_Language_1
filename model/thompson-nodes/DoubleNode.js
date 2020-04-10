@@ -1,4 +1,4 @@
-class DoubleNode {
+class DNode {
   constructor(data) {
     this.rightNode = null;
     this.leftNode = null;
@@ -38,4 +38,4 @@ class DoubleNode {
   }
 }
 
-module.exports = DoubleNode;
+module.exports = DNode;
