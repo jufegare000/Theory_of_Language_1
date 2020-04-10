@@ -31,6 +31,7 @@ class Unifikate {
         stackTrace.push(currentChar);
       } else {
         //Evaluate
+
         let firstExpression = stackTrace.pop();
         let secondExpression = currentChar;
         operator = stackTrace.pop();
@@ -42,6 +43,24 @@ class Unifikate {
             operator,
             stackTrace
           );
+          while (
+            !this.operators.includes(stackTrace[stackTrace.length - 1]) &&
+            stackTrace.length !== 0
+          ) {
+            firstExpression = stackTrace.pop();
+            operator = stackTrace.pop();
+            this.singleCharToAdd(firstExpression, operator);
+          }
+          if (
+            stackTrace[stackTrace.length - 1] == "*" ||
+            stackTrace[stackTrace.length - 1] === "+"
+          ) {
+            thompsonaux = this.createStarOrPlus(
+              this.finalList.pop(),
+              stackTrace.pop()
+            );
+            this.finalList.push(thompsonaux);
+          }
         } else {
           thompsonaux = this.createStarOrPlus(firstExpression, operator);
           this.finalList.push(thompsonaux);
@@ -72,7 +91,7 @@ class Unifikate {
           this.finalList.push(thompsonAux);
         } else {
           thompsonAux = this.finalList.pop();
-          thompsonAux = this.createOrOrAnd(operator, newNode, thompsonAux);
+          thompsonAux = this.createOrOrAnd(operator, thompsonAux, newNode);
           this.finalList.push(thompsonAux);
         }
       } else {
@@ -104,36 +123,42 @@ class Unifikate {
   }
 
   evaluateInStack(firstExpression, secondExpression, operator, stackTrace) {
-    let operatorAux = stackTrace[stackTrace.length - 1];
+    let operatorAux;
     let thompsonAux;
-    if ((stackTrace[stackTrace.length - 1] != "|", ".")) {
-      if (operator === "|" || operator === ".") {
-        thompsonAux = this.createOrOrAnd(
-          operator,
-          firstExpression,
-          secondExpression
-        );
-        this.finalList.push(thompsonAux);
-      }
-      operatorAux = stackTrace[stackTrace.length - 1];
-      if (
-        this.finalList.length !== 0 &&
-        (operatorAux == "*" || operatorAux === "+")
-      ) {
-        thompsonAux = this.createStarOrPlus(
-          this.finalList[this.finalList.length - 1],
-          operatorAux
-        );
-        this.finalList.pop();
-        this.finalList.push(thompsonAux);
-        stackTrace.pop();
-      }
-      if (this.finalList.length === 0) {
-        thompsonAux = this.createStarOrPlus(firstExpression, operator);
-        this.finalList.push(thompsonAux);
-        stackTrace.push(secondExpression);
-      }
+    let charAux;
+
+    if (operator === "|" || operator === ".") {
+      thompsonAux = this.createOrOrAnd(
+        operator,
+        firstExpression,
+        secondExpression
+      );
+      this.finalList.push(thompsonAux);
     }
+    operatorAux = stackTrace.pop();
+    if (
+      this.finalList.length !== 0 &&
+      (operatorAux == "*" || operatorAux === "+")
+    ) {
+      thompsonAux = this.finalList.pop();
+      thompsonAux = this.createStarOrPlus(thompsonAux, operatorAux);
+      this.finalList.push(thompsonAux);
+    } else if (this.finalList.length === 0) {
+      thompsonAux = this.createStarOrPlus(firstExpression, operator);
+      this.finalList.push(thompsonAux);
+      stackTrace.push(secondExpression);
+    } else {
+      charAux = operatorAux;
+      operatorAux = stackTrace.pop();
+      this.singleCharToAdd(charAux, operatorAux);
+    }
+  }
+
+  singleCharToAdd(char, operator) {
+    let newNode = new Unique(char);
+    let firstExpression = this.finalList.pop();
+    let finalaux = this.createOrOrAnd(operator, newNode, firstExpression);
+    this.finalList.push(finalaux);
   }
 
   createStarOrPlus(firsExpression, topOfStack) {
