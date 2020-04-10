@@ -30,4 +30,4 @@ class Transition {
   }
 }
 
-module.exports = Transition;
+//module.exports = Transition;

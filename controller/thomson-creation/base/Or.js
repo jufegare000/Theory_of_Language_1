@@ -1,5 +1,5 @@
 /* let DNode = require("../../../model/thompson-nodes/DoubleNode");*/
-class Or { 
+class Or {
   constructor(list1, list2) {
     return this.createOr(list1, list2);
   }
@@ -28,4 +28,4 @@ class Or {
   }
 }
 
-module.exports = Or;
+//module.exports = Or;

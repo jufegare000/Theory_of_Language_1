@@ -2,7 +2,8 @@ class List {
   constructor() {
     this.noOfNodes = 0;
     this.first = null;
-    this.last = null;5
+    this.last = null;
+    5;
   }
 
   returnFirst() {
@@ -52,4 +53,4 @@ class List {
   }
 }
 
-module.exports = List;
+//module.exports = List;
