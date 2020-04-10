@@ -100,7 +100,7 @@ class Unifikate {
     utils.setIdentifiers(firstNode, 0);
     let routes = routesClass.convertToDeterministic(firstNode);
     let readyStates = this.CreateStates.createStates(routes);
-    return readyStates; 
+    return readyStates;
   }
 
   evaluateInStack(firstExpression, secondExpression, operator, stackTrace) {
@@ -179,10 +179,5 @@ class Unifikate {
     return generatedList;
   }
 }
-/* 
-let Infx = new InfixToPreFix();
-let infixExpre = Infx.infixToPrez("(a.b)+");
-let Proof = new Unifikate();
-let thomp = Proof.unify(infixExpre);
- */
-module.exports = Unifikate;
+
+//module.exports = Unifikate;

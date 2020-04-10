@@ -38,4 +38,4 @@ class DNode {
   }
 }
 
-module.exports = DNode;
+//module.exports = DNode;
