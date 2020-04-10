@@ -91,4 +91,4 @@ class InfixToPreFix {
   }
 }
 
-module.exports = InfixToPreFix;
+//module.exports = InfixToPreFix;

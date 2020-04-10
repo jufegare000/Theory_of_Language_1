@@ -38,4 +38,4 @@ class ThompsonUtils {
   }
 }
 
-module.exports = ThompsonUtils;
+//module.exports = ThompsonUtils;

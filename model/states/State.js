@@ -8,7 +8,9 @@ class State {
   setAcceptation() {
     this.state = 1;
   }
-
+  getAcceptation() {
+    return this.state;
+  }
   setName(name) {
     this.name = name;
   }
@@ -25,4 +27,4 @@ class State {
     this.transtions.push(transtion);
   }
 }
-module.exports = State;
+//module.exports = State;

@@ -1,12 +1,12 @@
-let InfixToPreFix = require("../utils/InfixToPreFix");
-let Star = require("../base/Star");
+//let InfixToPreFix = require("../utils/InfixToPreFix");
+/* let Star = require("../base/Star");
 let Plus = require("../base/Plus");
 let Concat = require("../base/Concat");
 let Or = require("../base/Or");
 let Node = require("../base/Unique");
 let Utils = require("../utils/ThompsonUtils");
 let RoutesConstruction = require("./StoreNodesAndRoutes");
-let CreateStates = require("./CreateStates");
+let CreateStates = require("./CreateStates"); */
 
 class Unifikate {
   constructor() {
@@ -49,10 +49,12 @@ class Unifikate {
         }
       }
     }
+    let finalAutomata;
     if (stackTrace.length === 0) {
       let lastExpression = this.finalList.pop();
-      this.reAssignIndexes(lastExpression);
-    } else this.completeThompson(stackTrace);
+      finalAutomata = this.reAssignIndexes(lastExpression);
+    } else finalAutomata = this.completeThompson(stackTrace);
+    return finalAutomata;
   }
 
   completeThompson(stackTrace) {
@@ -63,7 +65,7 @@ class Unifikate {
       if (!this.operators.includes(topOfStack)) {
         operator = stackTrace.pop();
 
-        let newNode = new Node(topOfStack);
+        let newNode = new Unique(topOfStack);
         console.log("Se creó el nodo con el dato: ", topOfStack);
         if (operator == "*" || operator == "+") {
           thompsonAux = this.createStarOrPlus(newNode, operator);
@@ -86,17 +88,19 @@ class Unifikate {
       }
     }
     let lastExpression = this.finalList.pop();
-    this.reAssignIndexes(lastExpression);
+    let finalAutomata = this.reAssignIndexes(lastExpression);
+    return finalAutomata;
   }
 
   reAssignIndexes(lastExpression) {
-    let utils = new Utils();
-    let routesClass = new RoutesConstruction();
+    let utils = new ThompsonUtils();
+    let routesClass = new StoreNodesAndRoutes();
 
     let firstNode = lastExpression.list.returnFirst();
     utils.setIdentifiers(firstNode, 0);
     let routes = routesClass.convertToDeterministic(firstNode);
-    this.CreateStates.createStates(routes);
+    let readyStates = this.CreateStates.createStates(routes);
+    return readyStates;
   }
 
   evaluateInStack(firstExpression, secondExpression, operator, stackTrace) {
@@ -137,7 +141,7 @@ class Unifikate {
 
     if (!!firsExpression.length) {
       //is a char
-      let listOfUnique = new Node(firsExpression);
+      let listOfUnique = new Unique(firsExpression);
       console.log("se creará el nodo con dato: ", firsExpression);
       if (topOfStack === "*") {
         thompsonAux = new Star(listOfUnique);
@@ -158,8 +162,8 @@ class Unifikate {
     let generatedList;
 
     if (!!firsExpression.length) {
-      let listForFirst = new Node(firsExpression);
-      let listForSecond = new Node(secondExpression);
+      let listForFirst = new Unique(firsExpression);
+      let listForSecond = new Unique(secondExpression);
       if (operator === ".") {
         generatedList = new Concat(listForFirst, listForSecond);
       } else {
@@ -176,7 +180,4 @@ class Unifikate {
   }
 }
 
-let Infx = new InfixToPreFix();
-let infixExpre = Infx.infixToPrez("(a.b)+");
-let Proof = new Unifikate();
-let thomp = Proof.unify(infixExpre);
+//module.exports = Unifikate;

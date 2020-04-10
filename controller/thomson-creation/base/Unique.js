@@ -1,5 +1,5 @@
-let DNode = require("../../../model/thompson-nodes/DoubleNode");
-let List = require("../../../model/thompson-nodes/LDL");
+/* let DNode = require("../../../model/thompson-nodes/DoubleNode");
+let List = require("../../../model/thompson-nodes/LDL"); */
 
 class Unique {
   constructor(data) {
@@ -18,4 +18,4 @@ class Unique {
   }
 }
 
-module.exports = Unique;
+//module.exports = Unique;

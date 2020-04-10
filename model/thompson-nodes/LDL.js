@@ -1,8 +1,9 @@
-class LDL {
+class List {
   constructor() {
     this.noOfNodes = 0;
     this.first = null;
     this.last = null;
+    5;
   }
 
   returnFirst() {
@@ -52,4 +53,4 @@ class LDL {
   }
 }
 
-module.exports = LDL;
+//module.exports = List;

@@ -26,7 +26,7 @@ const validateSymbols = regEx => {
 
 const main = () => {
     // get Regular expression as a String
-    let regEx = "((ac|d*b*c*c*))a+";
+    let regEx = "(a|b)+";
     let validity = validateSymbols(regEx);
     
 }

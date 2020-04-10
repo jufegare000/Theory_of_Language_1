@@ -1,4 +1,4 @@
-let DNode = require("../../../model/thompson-nodes/DoubleNode");
+/* let DNode = require("../../../model/thompson-nodes/DoubleNode"); */
 class Star {
   constructor(data) {
     return this.createStar(data);
@@ -26,6 +26,4 @@ class Star {
   }
 }
 
-module.exports = Star;
-
-// let star = new Star("x", "s");
+//module.exports = Star;

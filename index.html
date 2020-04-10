@@ -3,103 +3,95 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Prácticas 1 y 2 teoría de lenguajes y laboratorio</title>
+    <title>Práctica 1 teoría de lenguajes y laboratorio</title>
 
 
     <!-- Librería externas-->
 
     <!-- Materialize css y jquery -->
-    <link rel="stylesheet" href="libreriasExternas/materialize.min.css">
+    <link rel="stylesheet" href="./view/externLibraries/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="libreriasExternas/jquery.min.js"></script>
-    <script src="libreriasExternas/materialize.min.js"></script>
+    <script src="./view/externLibraries/jquery.min.js"></script>
+    <script src="./view/externLibraries/materialize.min.js"></script>
+     <!-- Compiled and minified CSS -->
+     
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
+     <!-- Compiled and minified JavaScript -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+             
     <!-- Treantjs -->
-    <script src="./libreriasExternas/Treant.js"></script>
-    <script src="./libreriasExternas/vendor/raphael.js"></script>
-    <link href="./libreriasExternas/Treant.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="./view/externLibraries/Treant.css">
+    <link rel="stylesheet" href="./view/externLibraries/Treant.js">
+    <link href="./view/externLibraries/Treant.css" rel="stylesheet" type="text/css" />
 
     <!-- fin Librería externas-->
 
     <!-- Estilos de la aplicación-->
-    <link href="./css/index.css" rel="stylesheet">
+    <link href="./view/css/index.css" rel="stylesheet">
 
     <!--Archivos principales-->
-
-    <script src="./scripts/validadores/validadorExpresion.js"></script>
+    <script src="./controller/thomson-creation/base/Concat.js"></script>
+    <script src="./controller/thomson-creation/base/Or.js"></script>
+    <script src="./controller/thomson-creation/base/Plus.js"></script>
+    <script src="./controller/thomson-creation/base/Star.js"></script>
+    <script src="./controller/thomson-creation/base/Unique.js"></script>
+    <script src="./controller/thomson-creation/utils/ThompsonUtils.js"></script>
+    <script src="./model/states/State.js"></script>
+    <script src="./model/states/Transition.js"></script>
+    <script src="./model/thompson-nodes/DoubleNode.js"></script>
+    <script src="./model/thompson-nodes/LDL.js"></script> 
+    <script src="./controller/thomson-creation/construction/CreateStates.js"></script>
+    <script src="./controller/thomson-creation/construction/StoreNodesAndRoutes.js"></script>
+    <script src="./controller/thomson-creation/construction/Unifikate.js"></script> 
+    <script src="./controller/thomson-creation/utils/InfixToPreFix.js"></script>
+    <script src="./controller/validador/validarExpresion.js"></script>
+    <script src="controller/validador/infixPrefix.js"></script>
+    <script src="controller/validador/automataFinito.js"></script>
+    <script src="./controller/validador/GraficadorAFD.js"></script>
     <script src="./controller/index.js"></script>
 
 </head>
-
-<body>
-
-    <nav>
-        <div class="nav-wrapper green">
-            <div id="title-without-afd">
-                <a href="#!" data-target="slide-out" class="sidenav-trigger brand-logo display-always">
-                    <span id='main-title'>Práctica 1 Teoría del lenguaje</span>
-                </a>
-
-            </div>
-
-            <div id="title-with-afd">
-                <a href="#!" onclick="backToEXInput()" class=" margin-left brand-logo display-always">
-                    <i class="material-icons">arrow_back</i>
-                    AFD de (
-                    <span id='ex-title'></span>)
-                </a>
-            </div>
-
-        </div>
-    </nav>
-
-    <ul id="slide-out" class="sidenav">
-        <li>
-            <nav>
-                <div class="nav-wrapper green padding-nav">
-                    <a href="#!" class="brand-logo " style="font-size: 14">Teoria de lenguajes</a>
-                </div>
-            </nav>
-            <br>
-            <div class="align-center">
-                <img src="img/logoUdea.png">
-            </div>
-        </li>
-
-        <li class="copy-right">Victor Cardona Vera © 2018</li>
-    </ul>
-
-    <div class="row content-input" id="content-input">
+<body style="background-color:rgb(203, 228, 238);">
+    
+    <div style="background-color:rgb(159, 181, 209);color:white;padding:15px;">   
+        
+            <div id="title-without-afd"></div>
+                <a href="#!" class="sidenav-trigger brand-logo display-always"></a>
+                    <div id='main-title' style="color: #111;"><h4>Práctica 1 Teoría del lenguaje</h2>
+            </div>         
+    </div>       
+    <div>
+        
         <div class="input-field col s10">
             <input onkeyup="validarExpresionVacia()" id="txtExpresion" type="text" class="validate">
             <label for="txtExpresion">Ingrese aquí la expresión regular</label>
         </div>
         <div class="col s2">
-            <button id="btnProcesarExpresion" disabled="true" class="btn waves-effect waves-light orange darken-1 btn-process" type="submit"
-                name="action" onclick="procesarExpresion()">
+            
+            <button  id="btnProcesarExpresion"  data-position="top" 
+                class="btn waves-effect waves-light"
+                type="submit" name="action"   onclick="procesarExpresion()">
                 Convertir
-                <i class="material-icons right">send</i>
+                <i  target="_blank" class="material-icons right">send</i>
+                
             </button>
+            
+            <a class="right" >
+                <img src = "picture.png" style="width:200px;height:200px;">
+            </a>    
         </div>
+        
+        
     </div>
-    <div id="results">
 
-        <ul id="tabs-swipe-demo" class="tabs green">
-            <li class="tab col s3" id="tab-swipe-1">
-                <a class="active" href="#swipe-1">ÁRBOL sintáctico</a>
-            </li>
+    <div>
+        <ul class="tabs green">
             <li class="tab col s3">
-                <a href="#swipe-2">Autómata finito</a>
-            </li>
-            <li class="tab col s3">
-                <a href="#swipe-3">Descargar código</a>
+                <a href="#swipe-1">Autómata finito</a>
             </li>
         </ul>
         <div id="swipe-1" class="col s12 ">
-            <div id="p5"></div>
-        </div>
-        <div id="swipe-2" class="col s12 ">
-
             <div class="row contenedor-afd">
                 <div class="col s6">
                     <div class="card-panel">
@@ -117,10 +109,11 @@
                                 <label for="txtHilera">Ingrese aquí la hilera</label>
                             </div>
                             <div class="col s2">
-                                <button data-position="top" data-tooltip="Reconocer" class="tooltipped btn-floating waves-effect waves-light orange darken-1 btn-process"
+                                <button data-position="top" data-tooltip="Reconocer" class="tooltipped btn-floating waves-effect waves-light  btn-process"
                                     type="submit" name="action" onclick="reconocerHilera()">
                                     <i class="material-icons right">send</i>
                                 </button>
+                                
                             </div>
                         </div>
                         <div id="errror-hilera"></div>
@@ -142,3 +135,7 @@
 </body>
 
 </html>
+<script>
+
+
+</script>
